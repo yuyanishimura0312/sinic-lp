@@ -1,0 +1,1048 @@
+/* SINIC経営コンソーシアム2025 レポートCSS v5
+   印刷品質最優先 — ミラツクCI準拠 — ページヘッダー/フッター対応
+   ================================================================
+   デザインルール:
+   - フォント: 本文=ヒラギノ角ゴ 14.5px/line-height:2.1, 見出し=ヒラギノ明朝
+   - 色: 本文=#1e1e1e, 見出し=#7A4033, 補助=#727272
+   - 段落: text-indent:1em（見出し直後は除く）, margin-bottom:22px
+   - セクション間隔: h2前=60px, h3前=44px, h4前=32px
+   - 引用: border-left:4px #CEA26F, background:#f8f4ef
+   - 強調: background:linear-gradient(transparent 70%, rgba(240,166,113,0.18) 70%)
+   - insight-box内strong: 白色、ハイライトなし
+   - 表: thead=#7A4033白文字、偶数行=#faf8f5
+   - 図表前後: margin:32px
+   - 写真: border:1px solid #d5d0ca, figcaption:12px #727272 bg:#f3ede6
+   ================================================================ */
+
+/* ====== CSS Variables (ミラツクカラーパレット) ====== */
+:root {
+  --mi-golden-orange: #F0A671;
+  --mi-light-beige: #F2C792;
+  --mi-warm-beige: #F1C189;
+  --mi-camel: #CEA26F;
+  --mi-pale-peach: #F8CDAC;
+  --mi-sand-gold: #F0BE83;
+  --mi-soft-salmon: #EFC4A4;
+  --mi-rose-peach: #F7BEA2;
+  --mi-terracotta: #DC8766;
+  --mi-amber-brown: #B07256;
+  --mi-warm-brown: #966D5E;
+  --mi-deep-brown: #7A4033;
+
+  --accent: #783c28;
+  --bg: #f7f4f0;
+  --bg-card: #ffffff;
+  --text-primary: #1e1e1e;
+  --text-secondary: #3a3a3a;
+  --text-muted: #727272;
+  --border: #d5d0ca;
+  --border-light: #e8e3dc;
+
+  --font-body: "Hiragino Kaku Gothic ProN", "游ゴシック体", YuGothic, sans-serif;
+  --font-heading: "Hiragino Mincho ProN", "游明朝体", "Yu Mincho", serif;
+  --font-accent: Georgia, "Hiragino Mincho ProN", serif;
+}
+
+/* ====== Reset ====== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-size: 15px; -webkit-font-smoothing: antialiased; }
+
+body {
+  font-family: var(--font-body);
+  font-weight: 400;
+  color: var(--text-primary);
+  background: var(--bg);
+  line-height: 2.1;
+  letter-spacing: 0.02em;
+}
+
+::selection { background: var(--mi-pale-peach); color: var(--mi-deep-brown); }
+
+/* ====== Layout ====== */
+.report-container {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 52px 44px;
+  background: #fff;
+  min-height: 100vh;
+}
+
+.report-container::before {
+  content: '';
+  display: block;
+  height: 3px;
+  background: linear-gradient(90deg, var(--mi-deep-brown), var(--mi-terracotta), var(--mi-golden-orange), var(--mi-pale-peach));
+  margin: -52px -44px 0;
+}
+
+/* ====== Page Header（画面表示用。印刷時は非表示→Playwrightで別途制御） ====== */
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0 12px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 36px;
+}
+
+.page-header img {
+  height: 22px;
+  width: auto;
+  display: block;
+}
+
+.page-header .header-label {
+  font-size: 10px;
+  color: var(--text-muted);
+  letter-spacing: 0.12em;
+  font-family: var(--font-body);
+  white-space: nowrap;
+}
+
+/* ====== Page Footer（ページ下部: タイトル + ページ番号） ====== */
+.page-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0 0;
+  border-top: 1px solid var(--border);
+  margin-top: 48px;
+  font-size: 10px;
+  color: var(--text-muted);
+}
+
+.page-footer-title {
+  font-size: 10px;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.page-footer .page-number {
+  font-size: 10px;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  margin-left: 16px;
+}
+
+/* ====== Report Header（表紙） ====== */
+.report-header {
+  text-align: center;
+  padding: 52px 0 44px;
+  margin-bottom: 44px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* .report-header内は全てtext-align:center */
+.report-header * {
+  text-align: center;
+}
+
+.report-header .consortium-label {
+  display: inline-block;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  color: var(--mi-warm-brown);
+  text-transform: uppercase;
+  margin-bottom: 18px;
+  padding: 5px 18px;
+  border: 1px solid var(--mi-warm-brown);
+  /* 折り返し禁止 */
+  white-space: nowrap;
+}
+
+.report-header h1 {
+  font-family: var(--font-heading);
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--mi-deep-brown);
+  line-height: 1.5;
+  margin: 14px auto;
+  /* h1のmax-widthを十分に取る */
+  max-width: 620px;
+  letter-spacing: 0.03em;
+  text-indent: 0;
+}
+
+.report-header .subtitle {
+  font-family: var(--font-heading);
+  font-size: 14.5px;
+  color: var(--text-muted);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  margin-top: 6px;
+}
+
+.report-meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 18px 44px;
+  margin: 28px auto 0;
+  max-width: 500px;
+}
+
+/* .report-meta内の各divは適切なmin-widthで改行防止 */
+.report-meta > div {
+  text-align: center;
+  min-width: 120px;
+}
+
+.report-meta dt {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--mi-warm-brown);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 3px;
+}
+
+.report-meta dd {
+  margin-left: 0;
+  color: var(--text-secondary);
+  font-size: 13.5px;
+  white-space: nowrap;
+}
+
+/* ====== TOC ====== */
+.toc {
+  background: #f3ede6;
+  border-left: 3px solid var(--mi-deep-brown);
+  padding: 28px 36px;
+  margin-bottom: 52px;
+}
+
+.toc h2 {
+  font-family: var(--font-heading);
+  font-size: 13px;
+  color: var(--mi-deep-brown);
+  margin: 0 0 18px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-top: 0;
+}
+
+.toc h2::before { display: none; }
+
+.toc ol { list-style: none; counter-reset: toc; padding-left: 0; }
+
+.toc li {
+  counter-increment: toc;
+  margin-bottom: 0;
+  padding: 7px 0;
+  border-bottom: 1px dotted var(--border-light);
+}
+
+.toc li:last-child { border-bottom: none; }
+
+.toc li::before {
+  content: counter(toc, decimal-leading-zero);
+  color: var(--mi-deep-brown);
+  font-weight: 700;
+  margin-right: 14px;
+  font-size: 12px;
+}
+
+.toc a { color: var(--text-secondary); text-decoration: none; font-size: 13.5px; }
+.toc a:hover { color: var(--mi-deep-brown); }
+
+/* ====== Headings — 階層的リズム ====== */
+h2 {
+  font-family: var(--font-heading);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--mi-deep-brown);
+  /* セクション間隔: h2前=60px */
+  margin-top: 60px;
+  margin-bottom: 26px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+  line-height: 1.5;
+}
+
+h2::before {
+  content: '';
+  display: block;
+  width: 36px;
+  height: 3px;
+  background: var(--mi-deep-brown);
+  margin-bottom: 14px;
+}
+
+h3 {
+  font-family: var(--font-heading);
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--mi-deep-brown);
+  /* セクション間隔: h3前=44px */
+  margin-top: 44px;
+  margin-bottom: 18px;
+  padding-left: 18px;
+  border-left: 4px solid var(--mi-terracotta);
+  line-height: 1.5;
+}
+
+h4 {
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+  /* セクション間隔: h4前=32px */
+  margin-top: 32px;
+  margin-bottom: 14px;
+}
+
+/* ====== Body Text — 可読性最適化 ====== */
+p {
+  /* 本文: ヒラギノ角ゴ 14.5px / line-height:2.1 */
+  font-size: 14.5px;
+  line-height: 2.1;
+  margin-bottom: 22px;
+  text-align: justify;
+  /* 段落: text-indent:1em */
+  text-indent: 1em;
+}
+
+/* 見出し直後・リスト直後・図直後はインデントなし */
+h2 + p, h3 + p, h4 + p,
+ul + p, ol + p,
+figure + p, .highlight-box + p, .insight-box + p, .diagram-figure + p,
+blockquote + p, table + p,
+.session-info + p,
+.page-header + p {
+  text-indent: 0;
+}
+
+/* ====== Strong — 視覚的強調 ====== */
+strong {
+  font-weight: 700;
+  color: var(--text-primary);
+  /* 強調: background:linear-gradient(transparent 70%, rgba(240,166,113,0.18) 70%) */
+  background: linear-gradient(transparent 70%, rgba(240,166,113,0.18) 70%);
+  padding: 0 2px;
+}
+
+h2 strong, h3 strong, h4 strong { background: none; padding: 0; }
+
+/* insight-box内strong: 白色、ハイライトなし */
+.insight-box strong { color: #fff; background: none; padding: 0; font-weight: 700; }
+
+/* ====== Blockquote ====== */
+/* 引用: border-left:4px #CEA26F, background:#f8f4ef */
+blockquote {
+  border-left: 4px solid var(--mi-camel);
+  background: #f8f4ef;
+  padding: 18px 26px;
+  margin: 28px 0;
+  color: var(--text-secondary);
+}
+
+blockquote p {
+  font-size: 14px;
+  line-height: 2.0;
+  margin-bottom: 8px;
+  text-indent: 0;
+}
+
+blockquote cite {
+  display: block;
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 10px;
+  font-style: normal;
+}
+
+blockquote cite::before { content: '\2014\00a0'; }
+
+/* ====== Lists ====== */
+ul, ol { padding-left: 30px; margin-bottom: 22px; }
+
+li {
+  font-size: 14px;
+  line-height: 1.9;
+  margin-bottom: 8px;
+}
+
+li::marker { color: var(--mi-deep-brown); }
+
+/* ====== Tables ====== */
+/* 表: thead=#7A4033白文字、偶数行=#faf8f5 */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  /* 図表前後: margin:32px */
+  margin: 32px 0;
+  font-size: 13.5px;
+}
+
+thead th {
+  background: var(--mi-deep-brown);
+  color: white;
+  padding: 11px 18px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 12.5px;
+  letter-spacing: 0.03em;
+  border-bottom: 2px solid #5c2e1f;
+}
+
+tbody td {
+  padding: 11px 18px;
+  border-bottom: 1px solid var(--border-light);
+  vertical-align: top;
+  line-height: 1.75;
+}
+
+tbody tr:nth-child(even) { background: #faf8f5; }
+
+/* ====== Highlight Box ====== */
+.highlight-box {
+  background: #faf6f0;
+  border: 1px solid #e2d5c5;
+  border-left: 5px solid var(--mi-golden-orange);
+  padding: 22px 26px;
+  margin: 32px 0;
+}
+
+.highlight-box h4 { color: var(--mi-deep-brown); margin-top: 0; font-size: 14px; }
+.highlight-box p { text-indent: 0; }
+
+/* ====== Insight Box ====== */
+.insight-box {
+  background: var(--mi-deep-brown);
+  color: white;
+  padding: 26px 30px;
+  margin: 32px 0;
+}
+
+.insight-box h4 {
+  color: var(--mi-pale-peach);
+  margin-top: 0;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.insight-box p, .insight-box li, .insight-box span, .insight-box a {
+  color: rgba(255,255,255,0.93);
+  font-size: 13.5px;
+  line-height: 1.95;
+}
+
+.insight-box p { text-indent: 0; }
+.insight-box ul, .insight-box ol { padding-left: 26px; }
+.insight-box li { margin-bottom: 7px; }
+.insight-box li::marker { color: var(--mi-pale-peach); }
+
+/* ====== Company Badge ====== */
+.company-badge {
+  display: inline-block;
+  background: var(--mi-deep-brown);
+  color: white;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 14px;
+  margin-bottom: 10px;
+}
+
+/* ====== Session Info ====== */
+.session-info {
+  display: grid;
+  grid-template-columns: 86px 1fr;
+  gap: 2px 22px;
+  background: #f3ede6;
+  padding: 18px 26px;
+  margin-bottom: 32px;
+  font-size: 13.5px;
+}
+
+.session-info dt { font-weight: 600; color: var(--mi-warm-brown); font-size: 12px; padding: 5px 0; }
+.session-info dd { color: var(--text-secondary); padding: 5px 0; }
+
+/* ====== Glossary ====== */
+.glossary dl { display: grid; gap: 0; }
+
+.glossary dt {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--mi-deep-brown);
+  font-size: 14px;
+  background: #f3ede6;
+  padding: 8px 14px;
+  margin-top: 14px;
+  border-left: 3px solid var(--mi-terracotta);
+}
+
+.glossary dt:first-child { margin-top: 0; }
+
+.glossary dd {
+  color: var(--text-secondary);
+  font-size: 13px;
+  padding: 8px 14px 8px 20px;
+  margin-left: 0;
+  line-height: 1.85;
+  border-left: 3px solid var(--border-light);
+}
+
+/* ====== Photo ====== */
+/* 写真: border:1px solid #d5d0ca, figcaption:12px #727272 bg:#f3ede6 */
+.report-photo {
+  /* 図表前後: margin:32px */
+  margin: 32px 0;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.report-photo img { width: 100%; height: auto; display: block; }
+
+.report-photo figcaption {
+  background: #f3ede6;
+  padding: 9px 18px;
+  font-size: 12px;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border);
+}
+
+.report-photo-half {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin: 32px 0;
+}
+
+.report-photo-half figure { overflow: hidden; border: 1px solid var(--border); margin: 0; }
+.report-photo-half img { width: 100%; height: 180px; object-fit: cover; display: block; }
+.report-photo-half figcaption { background: #f3ede6; padding: 5px 14px; font-size: 11px; color: var(--text-muted); }
+
+/* ====== HR ====== */
+hr { border: none; height: 1px; background: linear-gradient(90deg, transparent, var(--border), transparent); margin: 52px 0; }
+
+/* ====== Report Footer（文末クレジット） ====== */
+.report-footer {
+  margin-top: 72px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 11px;
+}
+
+.report-footer .org-name {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  color: var(--mi-deep-brown);
+  letter-spacing: 0.14em;
+  font-size: 13.5px;
+}
+
+.report-footer .logo-text {
+  font-family: var(--font-accent);
+  font-size: 10px;
+  letter-spacing: 0.32em;
+  color: var(--mi-warm-brown);
+  text-transform: uppercase;
+  margin: 3px 0 10px;
+}
+
+/* ====== PDF Button ====== */
+.pdf-download { position: fixed; top: 20px; right: 20px; z-index: 1000; }
+
+.pdf-download button, .pdf-download a {
+  display: inline-block;
+  background: var(--mi-deep-brown);
+  color: white;
+  border: none;
+  padding: 9px 22px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: var(--font-body);
+  text-decoration: none;
+}
+
+/* ====== Diagram Components ====== */
+.diagram-figure {
+  background: #f6f1eb;
+  border: 1px solid var(--border);
+  padding: 26px 22px 18px;
+  /* 図表前後: margin:32px */
+  margin: 32px 0;
+}
+
+.diagram-figure figcaption {
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 14px;
+  font-style: italic;
+}
+
+/* Three-Layer Model */
+.diagram-three-layer { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-bottom: 18px; }
+
+.layer-card {
+  background: #fff;
+  padding: 18px;
+  text-align: center;
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--mi-golden-orange);
+}
+
+.layer-card.layer-outer { border-top-color: var(--mi-deep-brown); }
+.layer-card.layer-mid { border-top-color: var(--mi-amber-brown); }
+.layer-card.layer-inner { border-top-color: var(--mi-terracotta); background: #faf6f0; }
+
+.layer-card .layer-number {
+  display: inline-block; width: 26px; height: 26px; line-height: 26px;
+  border-radius: 50%; background: var(--mi-deep-brown); color: white;
+  font-size: 11px; font-weight: 700; margin-bottom: 8px;
+}
+
+.layer-card.layer-mid .layer-number { background: var(--mi-amber-brown); }
+.layer-card.layer-inner .layer-number { background: var(--mi-terracotta); }
+
+.layer-card .layer-title-ja { font-family: var(--font-heading); font-size: 14px; font-weight: 700; color: var(--mi-deep-brown); display: block; margin-bottom: 2px; }
+.layer-card .layer-title-en { font-size: 10px; color: var(--text-muted); display: block; margin-bottom: 10px; }
+.layer-card .layer-desc { font-size: 12.5px; color: var(--text-secondary); line-height: 1.75; text-align: left; margin-bottom: 0; }
+
+.diagram-circulations { display: flex; flex-wrap: wrap; gap: 7px; justify-content: center; padding-top: 14px; border-top: 1px dashed var(--border); }
+
+.circulation-item {
+  display: flex; align-items: center; gap: 5px;
+  background: #fff; padding: 5px 12px; border: 1px solid var(--border-light);
+  font-size: 11.5px; color: var(--text-secondary);
+}
+
+.circulation-item .circ-arrow { color: var(--mi-terracotta); font-weight: 700; }
+
+/* Backcasting Portfolio */
+.backcasting-timeline { display: flex; gap: 0; margin-bottom: 18px; overflow: hidden; border: 1px solid var(--border); }
+
+.timeline-phase { flex: 1; padding: 14px 18px; text-align: center; }
+.timeline-phase.phase-optimize { background: rgba(242,199,146,0.28); border-right: 1px solid var(--border); }
+.timeline-phase.phase-autonomous { background: rgba(239,196,164,0.28); border-right: 1px solid var(--border); }
+.timeline-phase.phase-natural { background: rgba(247,190,162,0.28); }
+
+.timeline-phase .phase-label { font-family: var(--font-heading); font-size: 14px; font-weight: 700; color: var(--mi-deep-brown); }
+.timeline-phase .phase-period { font-size: 11.5px; color: var(--text-muted); }
+
+.backcasting-routes { display: flex; flex-direction: column; gap: 12px; }
+.route-list { display: flex; flex-direction: column; gap: 12px; }
+
+.route-item {
+  display: grid; grid-template-columns: 38px 1fr; gap: 14px; align-items: start;
+  background: #fff; padding: 16px 18px; border: 1px solid var(--border);
+  border-left: 4px solid var(--mi-golden-orange);
+}
+
+.route-item:nth-child(2) { border-left-color: var(--mi-amber-brown); }
+.route-item:nth-child(3) { border-left-color: var(--mi-terracotta); }
+.route-arrow { display: none; }
+
+.probe-badge {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 34px; height: 34px; border-radius: 50%;
+  background: var(--mi-terracotta); color: white;
+  font-size: 11px; font-weight: 700;
+}
+
+.route-item:nth-child(2) .probe-badge { background: var(--mi-amber-brown); }
+.route-item:nth-child(3) .probe-badge { background: var(--mi-deep-brown); }
+
+.route-content .route-name { font-family: var(--font-heading); font-weight: 700; font-size: 14px; color: var(--mi-deep-brown); margin-bottom: 4px; }
+.route-content .route-desc { font-size: 12.5px; color: var(--text-secondary); line-height: 1.75; }
+
+.backcasting-criteria { margin-top: 14px; background: #fff; padding: 16px 18px; border: 1px solid var(--border); }
+.backcasting-criteria .criteria-title { font-family: var(--font-heading); font-size: 13.5px; font-weight: 700; color: var(--mi-deep-brown); margin-bottom: 10px; }
+.criteria-list { display: flex; gap: 10px; flex-wrap: wrap; }
+.criteria-tag { font-size: 12.5px; color: var(--mi-deep-brown); background: #faf6f0; border: 1px solid #e0d2c4; padding: 5px 14px; }
+
+/* KPI Dashboard */
+.diagram-kpi {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.kpi-card {
+  background: #fff;
+  padding: 20px 22px;
+  border-right: 1px solid var(--border-light);
+  border-bottom: 1px solid var(--border-light);
+  position: relative;
+}
+
+.kpi-card:nth-child(2) { border-right: none; }
+.kpi-card:nth-child(4) { border-right: none; }
+.kpi-card:nth-child(3), .kpi-card:nth-child(4) { border-bottom: none; }
+
+.kpi-card .kpi-number {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  line-height: 28px;
+  text-align: center;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 10px;
+}
+
+.kpi-card:nth-child(1) .kpi-number { background: var(--mi-deep-brown); }
+.kpi-card:nth-child(2) .kpi-number { background: var(--mi-amber-brown); }
+.kpi-card:nth-child(3) .kpi-number { background: var(--mi-terracotta); }
+.kpi-card:nth-child(4) .kpi-number { background: var(--mi-golden-orange); }
+
+.kpi-card .kpi-title {
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--mi-deep-brown);
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--border-light);
+}
+
+.kpi-card .kpi-list { list-style: none; padding: 0; margin: 0; }
+
+.kpi-card .kpi-list li {
+  font-size: 12.5px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  padding: 6px 0 6px 20px;
+  border-bottom: 1px dotted var(--border-light);
+  margin-bottom: 0;
+  position: relative;
+}
+
+.kpi-card .kpi-list li::before {
+  content: '■';
+  position: absolute;
+  left: 0;
+  font-size: 6px;
+  top: 10px;
+  color: var(--mi-terracotta);
+}
+
+.kpi-card:nth-child(1) .kpi-list li::before { color: var(--mi-deep-brown); }
+.kpi-card:nth-child(2) .kpi-list li::before { color: var(--mi-amber-brown); }
+.kpi-card:nth-child(3) .kpi-list li::before { color: var(--mi-terracotta); }
+.kpi-card:nth-child(4) .kpi-list li::before { color: var(--mi-golden-orange); }
+
+.kpi-card .kpi-list li:last-child { border-bottom: none; }
+
+/* Dashboard header bar */
+.kpi-dashboard-header {
+  background: var(--mi-deep-brown);
+  color: white;
+  padding: 10px 22px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.kpi-dashboard-header .kpi-note {
+  font-size: 10px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.7);
+  letter-spacing: 0;
+}
+
+/* Process Steps */
+.diagram-process { display: flex; gap: 0; align-items: stretch; }
+
+.process-step {
+  flex: 1; background: #fff; border: 1px solid var(--border);
+  padding: 18px; text-align: center; position: relative;
+}
+
+.process-step:not(:last-child)::after {
+  content: '\2192'; position: absolute; right: -15px; top: 50%;
+  transform: translateY(-50%); font-size: 20px; color: var(--mi-terracotta);
+  z-index: 1; background: #f6f1eb; padding: 0 3px;
+}
+
+.process-step .step-number {
+  display: inline-block; width: 26px; height: 26px; line-height: 26px;
+  border-radius: 50%; background: var(--mi-deep-brown); color: white;
+  font-size: 11px; font-weight: 700; margin-bottom: 8px;
+}
+
+.process-step .step-title { font-family: var(--font-heading); font-size: 13px; font-weight: 700; color: var(--mi-deep-brown); display: block; margin-bottom: 6px; }
+.process-step .step-desc { font-size: 11.5px; color: var(--text-secondary); line-height: 1.6; text-align: left; }
+
+/* Response vs Correspondence */
+.diagram-response-correspondence { display: grid; grid-template-columns: 1fr auto 1fr; gap: 14px; align-items: center; }
+
+.response-box, .correspondence-box { background: #fff; border: 1px solid var(--border); padding: 18px; text-align: center; }
+.correspondence-box { background: #faf6f0; border: 2px solid var(--mi-terracotta); }
+
+.vs-arrow { font-size: 22px; color: var(--mi-terracotta); font-weight: 700; text-align: center; }
+
+.response-box .box-title, .correspondence-box .box-title { font-family: var(--font-heading); font-size: 15px; font-weight: 700; color: var(--mi-deep-brown); margin-bottom: 5px; }
+.response-box .box-subtitle, .correspondence-box .box-subtitle { font-size: 11px; color: var(--text-muted); margin-bottom: 10px; }
+.response-box .box-desc, .correspondence-box .box-desc { font-size: 12.5px; color: var(--text-secondary); line-height: 1.7; text-align: left; }
+
+/* ====== Print ====== */
+@media print {
+  /* ページマージン: 上20mm 左右16mm 下24mm */
+  @page {
+    size: A4;
+    margin: 20mm 16mm 24mm 16mm;
+  }
+
+  /* ページカウンター初期化 */
+  body {
+    counter-reset: page;
+    font-size: 10.5pt;
+    background: white;
+    color: #111;
+    line-height: 1.9;
+  }
+
+  .report-container {
+    max-width: none;
+    padding: 0;
+    margin: 0;
+    /* ページカウンター加算 */
+    counter-increment: page;
+  }
+
+  .report-container::before {
+    height: 2pt;
+    background: #7A4033;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .pdf-download { display: none; }
+  /* 画面用ヘッダーは印刷時非表示（PlaywrightのheaderTemplateで代替） */
+  .page-header { display: none; }
+
+  /* 表紙: page-break-after: always */
+  .report-header {
+    page-break-after: always;
+    padding: 56pt 0 32pt;
+  }
+
+  /* TOC: page-break-after: always */
+  .toc {
+    page-break-after: always;
+    background: #f0ebe5 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* h2のpage-break-before: always（最初のh2を除く）*/
+  h2 {
+    page-break-before: always;
+    page-break-after: avoid;
+    margin-top: 0;
+    font-size: 15pt;
+    color: #7A4033;
+  }
+
+  /* 最初のh2は改ページしない */
+  .report-container > h2:first-of-type,
+  .page-header + h2,
+  .toc + h2 {
+    page-break-before: avoid;
+  }
+
+  h2::before {
+    background: #7A4033;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  h3 {
+    page-break-after: avoid;
+    font-size: 12pt;
+    color: #7A4033;
+    border-left-color: #7A4033;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  h4 { page-break-after: avoid; font-size: 10.5pt; }
+
+  p {
+    font-size: 10.5pt;
+    line-height: 1.9;
+    margin-bottom: 9pt;
+    text-indent: 1em;
+  }
+
+  h2 + p, h3 + p, h4 + p { text-indent: 0; }
+
+  p, blockquote, li { orphans: 3; widows: 3; }
+
+  strong { background: none; border-bottom: none; font-weight: 700; }
+
+  blockquote {
+    border-left-color: #CEA26F;
+    background: #f5f0ea !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  table { page-break-inside: avoid; }
+  thead th {
+    background: #7A4033 !important;
+    color: white !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* 全boxにpage-break-inside: avoid */
+  .highlight-box {
+    page-break-inside: avoid;
+    background: #faf6f0 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .insight-box {
+    page-break-inside: avoid;
+    background: #7A4033 !important;
+    color: white !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .insight-box h4 {
+    color: #F8CDAC !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .insight-box p, .insight-box li {
+    color: rgba(255,255,255,0.9) !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .insight-box strong { color: white !important; }
+
+  .diagram-figure {
+    page-break-inside: avoid;
+    background: #f0ebe5 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .layer-card, .route-item, .kpi-card,
+  .backcasting-criteria, .process-step,
+  .response-box, .correspondence-box {
+    border: 1px solid #bbb;
+    page-break-inside: avoid;
+  }
+
+  .layer-card.layer-inner {
+    background: #faf6f0 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* 写真もpage-break-inside: avoid */
+  .report-photo {
+    page-break-inside: avoid;
+  }
+
+  .report-photo figcaption {
+    background: #f0ebe5 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .report-photo-half { page-break-inside: avoid; }
+
+  /* session-info, blockquote, highlight-box もbreak避ける */
+  .session-info { page-break-inside: avoid; }
+  blockquote { page-break-inside: avoid; }
+
+  /* ページフッター: CSS counterでページ番号 */
+  .page-footer {
+    margin-top: 32pt;
+  }
+
+  .page-footer .page-number::after {
+    content: counter(page);
+  }
+
+  .report-footer { font-size: 8.5pt; margin-top: 22pt; }
+
+  /* 画面用ヘッダーは印刷時非表示（PlaywrightのheaderTemplateで代替） */
+  .page-header { display: none !important; }
+
+  /* 用語解説の背景色を印刷で保持 */
+  .glossary dt {
+    background: #f0ebe5 !important;
+    border-left: 3px solid #DC8766 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .glossary dd {
+    border-left: 3px solid #e8e3dc !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* 図の全要素の背景色を保持 */
+  .timeline-phase, .route-item, .kpi-card, .process-step,
+  .response-box, .correspondence-box, .probe-badge,
+  .circulation-item, .criteria-tag {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .timeline-phase.phase-optimize { background: rgba(242,199,146,0.28) !important; }
+  .timeline-phase.phase-autonomous { background: rgba(239,196,164,0.28) !important; }
+  .timeline-phase.phase-natural { background: rgba(247,190,162,0.28) !important; }
+
+  .probe-badge {
+    background: #DC8766 !important;
+    color: white !important;
+  }
+
+  a { color: #111; text-decoration: none; }
+  a[href]::after { content: none; }
+}
+
+/* ====== Responsive ====== */
+@media (max-width: 768px) {
+  .report-container { padding: 24px 18px; }
+  .report-header h1 { font-size: 21px; max-width: 100%; }
+  h2 { font-size: 19px; margin-top: 44px; }
+  h3 { font-size: 15.5px; }
+  .report-meta { flex-direction: column; gap: 10px; }
+  .report-meta > div { min-width: unset; }
+  .diagram-three-layer, .diagram-kpi { grid-template-columns: 1fr; }
+  .diagram-process { flex-direction: column; }
+  .process-step:not(:last-child)::after {
+    content: '\2193'; right: auto; bottom: -15px; top: auto;
+    left: 50%; transform: translateX(-50%);
+  }
+  .diagram-response-correspondence { grid-template-columns: 1fr; }
+  .vs-arrow { transform: rotate(90deg); }
+  .report-photo-half { grid-template-columns: 1fr; }
+  .page-header .header-label { font-size: 9px; letter-spacing: 0.1em; }
+}

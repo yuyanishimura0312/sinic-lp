@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{TITLE}} | SINIC経営コンソーシアム2025</title>
+  <link rel="stylesheet" href="{{CSS_PATH}}">
+  <style>
+    /* Page-specific overrides can go here */
+  </style>
+</head>
+<body>
+
+<div class="pdf-download">
+  <button onclick="window.print()">PDF</button>
+</div>
+
+<div class="report-container">
+
+  <!-- Header -->
+  <header class="report-header">
+    <div class="consortium-label">SINIC経営コンソーシアム 2025</div>
+    <h1>{{TITLE}}</h1>
+    <p class="subtitle">{{SUBTITLE}}</p>
+    <dl class="report-meta">
+      <div>
+        <dt>開催日</dt>
+        <dd>{{DATE}}</dd>
+      </div>
+      <div>
+        <dt>会場</dt>
+        <dd>{{VENUE}}</dd>
+      </div>
+      <div>
+        <dt>作成</dt>
+        <dd>特定非営利活動法人ミラツク</dd>
+      </div>
+    </dl>
+  </header>
+
+  <!-- Table of Contents -->
+  <nav class="toc">
+    <h2>目次</h2>
+    <ol>
+      {{TOC}}
+    </ol>
+  </nav>
+
+  <!-- Main Content -->
+  <main>
+    {{CONTENT}}
+  </main>
+
+  <!-- Footer -->
+  <footer class="report-footer">
+    <p class="org-name">特定非営利活動法人ミラツク</p>
+    <p class="logo-text">MIRA TUKU</p>
+    <p>本レポートはSINIC経営コンソーシアム2025の成果物として作成されました</p>
+    <p>&copy; 2026 NPO法人ミラツク All rights reserved.</p>
+  </footer>
+
+</div>
+
+</body>
+</html>
